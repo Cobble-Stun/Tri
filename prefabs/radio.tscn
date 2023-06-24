@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bi7hl34t8ljdo"]
+
+[ext_resource type="Script" path="res://scripts/radio.gd" id="1_8sbn3"]
+[ext_resource type="PackedScene" uid="uid://nn7pay8b1oep" path="res://models/radio.glb" id="1_rio6d"]
+[ext_resource type="AudioStream" uid="uid://b33xhwbrvbnie" path="res://audio/sounds/radiorecording.wav" id="3_883ol"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8n0gg"]
+size = Vector3(0.287585, 0.47458, 0.684383)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_61pdm"]
+
+[node name="Radio" type="StaticBody3D"]
+script = ExtResource("1_8sbn3")
+
+[node name="radio" parent="." instance=ExtResource("1_rio6d")]
+transform = Transform3D(0.440884, 0, 0, 0, 0.440884, 0, 0, 0, 0.440884, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.223406, 0)
+shape = SubResource("BoxShape3D_8n0gg")
+
+[node name="CheckForPlayer" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CheckForPlayer"]
+shape = SubResource("BoxShape3D_61pdm")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.196499, 0.114899, -0.0987401)
+stream = ExtResource("3_883ol")
+volume_db = -5.0
+max_distance = 15.0
+panning_strength = 0.0
+bus = &"sfx"
+emission_angle_enabled = true
+
+[connection signal="body_entered" from="CheckForPlayer" to="." method="_on_check_for_player_body_entered"]

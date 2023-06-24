@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4gd08tae0fl0"]
+
+[ext_resource type="Script" path="res://scripts/GunPickup.gd" id="1_72ci6"]
+[ext_resource type="PackedScene" uid="uid://bvk4ixcnivxsa" path="res://models/tri shotgun world model.glb" id="2_rxwor"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bunfi"]
+size = Vector3(0.0857428, 0.279882, 1.32456)
+
+[node name="GunPickup" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_72ci6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0, 1, 0, -0.0365163, 0.298801)
+shape = SubResource("BoxShape3D_bunfi")
+
+[node name="tri shotgun world model" parent="." instance=ExtResource("2_rxwor")]
+transform = Transform3D(1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

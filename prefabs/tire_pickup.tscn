@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlaq0mpr47vow"]
+
+[ext_resource type="Script" path="res://scripts/Pickup.gd" id="1_jxvti"]
+[ext_resource type="PackedScene" uid="uid://c7wog10v1jkoo" path="res://models/tire.glb" id="2_rpvow"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_imk1j"]
+height = 0.227164
+radius = 0.420189
+
+[node name="TirePickup" type="Area3D"]
+script = ExtResource("1_jxvti")
+
+[node name="tire" parent="." instance=ExtResource("2_rpvow")]
+transform = Transform3D(-1.39876e-08, -0.32, 0, 0.32, -1.39876e-08, 0, 0, 0, 0.32, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_imk1j")

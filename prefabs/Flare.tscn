@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dek7fd1jwh0st"]
+
+[ext_resource type="PackedScene" uid="uid://db121ylr7drs5" path="res://models/flare.glb" id="1_1wtjc"]
+
+[node name="Flare" type="Node3D"]
+
+[node name="flare" parent="." instance=ExtResource("1_1wtjc")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.210027)
+light_color = Color(1, 0.254902, 0.243137, 1)
+light_size = 1.0

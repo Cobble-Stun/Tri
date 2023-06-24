@@ -1,0 +1,234 @@
+[gd_scene load_steps=8 format=3 uid="uid://vu2fsfvxowks"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_6qiht"]
+[ext_resource type="PackedScene" uid="uid://ctvwayhcmdak3" path="res://models/Tri hands.glb" id="2_8iyge"]
+[ext_resource type="PackedScene" uid="uid://cjfg4xudrm1v2" path="res://models/Tri shotgun.glb" id="3_yjksm"]
+[ext_resource type="PackedScene" uid="uid://c3l0l8kbil80k" path="res://models/shell left.glb" id="4_2v8fw"]
+[ext_resource type="AudioStream" uid="uid://c2atcfphjhpuq" path="res://audio/sounds/crickets.wav" id="5_4ors5"]
+[ext_resource type="PackedScene" uid="uid://33c656d1myy0" path="res://Canvas.tscn" id="6_j2rmm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x2iv1"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_6qiht")
+
+[node name="Neck" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.981509, 0)
+cull_mask = 1048573
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Neck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0699296, 0.0110605)
+light_color = Color(0.0901961, 0.0745098, 0.192157, 1)
+light_indirect_energy = 16.0
+
+[node name="FlashLight" type="SpotLight3D" parent="Neck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.358491, -0.374954)
+spot_range = 8.0
+spot_attenuation = 1.45
+spot_angle = 35.0
+spot_angle_attenuation = 0.999397
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Neck/Camera3D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Neck/Camera3D/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Guncam" type="Camera3D" parent="Neck/Camera3D/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.982, 0)
+cull_mask = 2
+
+[node name="Tri hands" parent="Neck/Camera3D" instance=ExtResource("2_8iyge")]
+transform = Transform3D(0.999501, 0, 0.0316026, 0, 1, 0, -0.0316026, 0, 0.999501, 0.101029, -0.00335324, -0.603773)
+visible = false
+
+[node name="Skeleton3D" parent="Neck/Camera3D/Tri hands/hands armature" index="0"]
+bones/0/position = Vector3(-0.00364452, 0.346164, 0.794072)
+bones/1/position = Vector3(0.145436, 0.0794619, 0.396537)
+bones/1/rotation = Quaternion(0.72663, 0.205596, -0.638324, 0.149271)
+bones/2/position = Vector3(0.104958, 0.0564572, 0.707371)
+bones/3/position = Vector3(0.132224, -0.047474, 0.0103779)
+bones/3/rotation = Quaternion(0.172823, 0.673713, -0.0628787, 0.715744)
+bones/4/rotation = Quaternion(-0.0331418, -0.000294787, 0.675269, 0.736827)
+bones/5/rotation = Quaternion(-0.000950851, 0.112821, 0.0315752, 0.993113)
+bones/6/position = Vector3(0.0169112, 0.0750514, 0.00412026)
+bones/6/rotation = Quaternion(-0.491475, 0.222981, 0.0487365, 0.84045)
+bones/7/rotation = Quaternion(-0.414906, 0.337025, 0.0332103, 0.844491)
+bones/8/rotation = Quaternion(-0.332026, 0.0518283, 0.0618534, 0.939812)
+bones/9/position = Vector3(0.0130695, 0.0943719, 0.0192791)
+bones/9/rotation = Quaternion(-0.0826152, 0.0957966, 0.0579606, 0.990272)
+bones/10/rotation = Quaternion(-0.687654, 0.0927064, 0.141139, 0.706129)
+bones/11/rotation = Quaternion(-0.0501132, 0.0195218, 0.0381866, 0.997822)
+bones/12/rotation = Quaternion(0.264065, 0.0762829, -0.0636164, 0.959377)
+bones/13/rotation = Quaternion(-0.752268, 0.0147236, -0.0353162, 0.657746)
+bones/14/rotation = Quaternion(-0.294353, -0.0196793, 0.0141391, 0.955389)
+bones/15/rotation = Quaternion(-0.0839117, 0.0343006, -0.0902448, 0.991785)
+bones/17/rotation = Quaternion(-0.392715, -0.0719422, -0.0490222, 0.91553)
+bones/18/rotation = Quaternion(-0.118018, 0.016061, 0.337035, 0.933928)
+bones/19/rotation = Quaternion(-0.12756, -0.0608828, 0.11737, 0.982978)
+bones/20/rotation = Quaternion(0.0115185, 0.0874612, -0.328968, 0.940212)
+bones/21/rotation = Quaternion(-0.0335881, 0.0294298, -0.377218, 0.925047)
+bones/22/position = Vector3(-0.15996, 0.0707175, 0.325285)
+bones/22/rotation = Quaternion(0.117386, -0.750664, -0.552358, 0.342964)
+bones/23/rotation = Quaternion(-0.425003, -0.282859, 0.119458, 0.851524)
+bones/24/rotation = Quaternion(0.383494, 0.0769413, 0.152096, 0.907678)
+bones/25/position = Vector3(-0.0422153, 0.0794007, -0.00112801)
+bones/25/rotation = Quaternion(-0.472554, -0.266805, -0.011079, 0.839872)
+bones/26/rotation = Quaternion(-0.479667, 0.0175648, -0.0160385, 0.877128)
+bones/27/rotation = Quaternion(0.0285414, -0.00884563, 0.017673, 0.999397)
+bones/28/position = Vector3(-0.0155165, 0.0937158, 9.67471e-05)
+bones/28/rotation = Quaternion(-0.517356, -0.232768, -0.0725891, 0.820301)
+bones/29/rotation = Quaternion(-0.224222, 0.00296896, 0.013852, 0.974435)
+bones/30/rotation = Quaternion(-0.263073, -0.006806, 0.00560032, 0.964736)
+bones/31/position = Vector3(0.0151806, 0.0907763, 0.00411472)
+bones/31/rotation = Quaternion(-0.22803, -0.262247, 0.00188566, 0.93767)
+bones/32/rotation = Quaternion(-0.467615, 0.0193541, 0.0237505, 0.883401)
+bones/33/rotation = Quaternion(-0.261267, 0.0191805, -0.0148088, 0.964962)
+bones/34/position = Vector3(0.0399438, 0.0793047, 0.00965608)
+bones/34/rotation = Quaternion(-0.23801, -0.237787, -0.0435941, 0.940696)
+bones/35/rotation = Quaternion(-0.351019, 0.0236512, 0.0142827, 0.935961)
+bones/36/rotation = Quaternion(-0.267172, 0.0488838, -0.00938896, 0.962362)
+bones/37/position = Vector3(0.0136359, 0.0109224, -0.00701473)
+bones/37/rotation = Quaternion(-0.17861, 0.0480731, -0.354112, 0.916729)
+bones/38/rotation = Quaternion(0.0887981, 0.365883, -0.0313431, 0.925884)
+bones/39/rotation = Quaternion(-0.166456, -0.105429, 0.133079, 0.971322)
+bones/40/rotation = Quaternion(0.0892595, -0.020848, -0.137769, 0.986214)
+
+[node name="Hands" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D" index="0"]
+layers = 2
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D" index="1"]
+transform = Transform3D(0.100546, 0.489351, -0.866271, -0.108218, 0.870897, 0.479403, 0.989029, 0.0455442, 0.140521, 0.141791, 0.266702, 0.397535)
+bone_name = "handik.r"
+bone_idx = 1
+
+[node name="Tri shotgun" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D" instance=ExtResource("3_yjksm")]
+transform = Transform3D(0.0988604, -0.170933, 0.980311, 0.487504, 0.867138, 0.102037, -0.867506, 0.467818, 0.169056, -0.435818, 0.00797844, -1.99527e-05)
+
+[node name="shell top_2" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.999999, 0.000470792, 0.00116101, -0.000530059, 0.998668, 0.0515882, -0.00113517, -0.0515888, 0.998668, 0.0153948, -0.0283452, -0.00263718)
+bone_idx = 4
+
+[node name="shell top_2" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/shell top_2" index="0"]
+layers = 2
+
+[node name="shell right" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="1"]
+transform = Transform3D(1.00001, 0.000470797, 0.00116101, -0.000530065, 0.998678, 0.0515882, -0.00113519, -0.0515893, 0.998668, 0.0153948, -0.0283452, -0.00263721)
+bone_idx = 6
+
+[node name="shell right" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/shell right" index="0"]
+layers = 2
+
+[node name="barrels" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="2"]
+transform = Transform3D(1.14366, 0.00053846, 0.00132774, -0.00060624, 1.14214, 0.0589994, -0.0012982, -0.0590001, 1.14214, 0.021943, -0.00828951, -0.00586993)
+bone_idx = 8
+
+[node name="barrels" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/barrels" index="0"]
+layers = 2
+
+[node name="crosshair" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.999999, 0.000470794, 0.00116101, -0.000530062, 0.998668, 0.0515883, -0.00113517, -0.0515888, 0.998668, 0.0153948, -0.0283452, -0.00263721)
+bone_idx = 9
+
+[node name="crosshair" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/crosshair" index="0"]
+layers = 2
+
+[node name="handrest" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.999999, 0.000470794, 0.00116101, -0.000530062, 0.998668, 0.0515883, -0.00113517, -0.0515888, 0.998668, 0.0153948, -0.0283452, -0.00263721)
+bone_idx = 10
+
+[node name="handrest" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/handrest" index="0"]
+layers = 2
+
+[node name="trigger1_2" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="5"]
+transform = Transform3D(1.14352, 0.00275903, 0.0177041, -0.00441429, 1.13857, 0.107684, -0.0173656, -0.107739, 1.13844, 0.0134523, -0.0416387, -0.00245592)
+bone_idx = 12
+
+[node name="trigger1_2" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/trigger1_2" index="0"]
+layers = 2
+
+[node name="trigger 2" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.999999, 0.00047078, 0.00116087, -0.000530028, 0.998669, 0.0515884, -0.00113504, -0.051589, 0.998668, 0.0153948, -0.0283453, -0.00263727)
+bone_idx = 14
+
+[node name="trigger 2" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/trigger 2" index="0"]
+layers = 2
+
+[node name="trigger 3" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.999999, 0.000470785, 0.0011608, -0.000530112, 0.998669, 0.0515883, -0.00113485, -0.0515889, 0.998668, 0.0153948, -0.0283452, -0.00263718)
+bone_idx = 16
+
+[node name="trigger 3" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/trigger 3" index="0"]
+layers = 2
+
+[node name="breach thing" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.999999, 0.000470794, 0.001161, -0.000530062, 0.998669, 0.0515882, -0.00113516, -0.0515888, 0.998668, 0.0153948, -0.0283452, -0.00263736)
+bone_idx = 18
+
+[node name="breach thing" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/breach thing" index="0"]
+layers = 2
+
+[node name="body_2" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="9"]
+transform = Transform3D(0.999999, 0.000470796, 0.001161, -0.000530064, 0.998668, 0.051588, -0.00113517, -0.0515886, 0.998668, 0.0153948, -0.0283452, -0.00263727)
+bone_idx = 19
+
+[node name="body_2" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/body_2" index="0"]
+layers = 2
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="10"]
+transform = Transform3D(1, -6.94827e-11, 2.39487e-07, -2.39487e-07, -3.95812e-08, 1, -6.94171e-11, -1, -8.47504e-08, -0.015, -7.07805e-08, 0.352267)
+bone_name = "shell left"
+bone_idx = 5
+
+[node name="shell left" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/BoneAttachment3D" instance=ExtResource("4_2v8fw")]
+transform = Transform3D(1.14366, -2.74333e-07, 2.04891e-08, -7.45058e-09, -7.07805e-08, -1.14366, 2.72063e-07, 1.14366, -4.47035e-08, 0.0304966, 0.354109, -0.000875831)
+
+[node name="shell left2" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/BoneAttachment3D/shell left" index="0"]
+layers = 2
+
+[node name="gunsoundorigin" type="Node3D" parent="Neck/Camera3D/Tri hands"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Neck/Camera3D"]
+target_position = Vector3(0, 0, -10)
+
+[node name="flashlightsoundorigin" type="Node3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.668147, -0.190427)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_x2iv1")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.951229, 0)
+
+[node name="Footstepsoundsorigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.00481, 0)
+
+[node name="Timer" type="Timer" parent="Footstepsoundsorigin"]
+process_callback = 0
+one_shot = true
+
+[node name="Ambience" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.960129, 0)
+stream = ExtResource("5_4ors5")
+autoplay = true
+panning_strength = 0.0
+
+[node name="CanvasLayer" parent="." instance=ExtResource("6_j2rmm")]
+
+[node name="TextTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="Footstepsoundsorigin/Timer" to="." method="_on_timer_timeout"]
+
+[editable path="Neck/Camera3D/Tri hands"]
+[editable path="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun"]
+[editable path="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/BoneAttachment3D/shell left"]

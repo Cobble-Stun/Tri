@@ -1,0 +1,83 @@
+[gd_scene load_steps=3 format=3 uid="uid://33c656d1myy0"]
+
+[ext_resource type="Texture2D" uid="uid://btawcnb62qs1a" path="res://BloodOverlay.png" id="1_4p1uw"]
+[ext_resource type="Theme" uid="uid://5m3pc78p1hj0" path="res://UITheme.tres" id="2_3a4vi"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="DamageOverlay" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("1_4p1uw")
+expand_mode = 3
+
+[node name="Black" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Health" type="RichTextLabel" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 59.0
+offset_top = -137.0
+offset_right = 488.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme = ExtResource("2_3a4vi")
+text = "Vitality: ///"
+
+[node name="Ammo" type="RichTextLabel" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -265.0
+offset_top = -182.0
+offset_right = -215.0
+offset_bottom = -133.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2, 2)
+theme = ExtResource("2_3a4vi")
+
+[node name="Reserve" type="RichTextLabel" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -177.0
+offset_top = -143.0
+offset_right = -32.0
+offset_bottom = -36.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_3a4vi")
+
+[node name="Message" type="RichTextLabel" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -141.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme = ExtResource("2_3a4vi")
+bbcode_enabled = true

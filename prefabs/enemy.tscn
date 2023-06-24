@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://thpj2pkruwrh"]
+
+[ext_resource type="Script" path="res://scripts/EnemyAI.gd" id="1_5i6uu"]
+[ext_resource type="PackedScene" uid="uid://co0tuv82q6ox5" path="res://models/shadowzombie.glb" id="2_isk4g"]
+[ext_resource type="Texture2D" uid="uid://v4vk3l4vr2to" path="res://models/shadowzombie_shadow zombie.png" id="3_is3qh"]
+[ext_resource type="AudioStream" uid="uid://b8ncddcxqdqhe" path="res://audio/sounds/enemyambience.wav" id="4_2ou7b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v3wgt"]
+size = Vector3(0.511662, 2.03681, 0.569991)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hd6b5"]
+diffuse_mode = 2
+albedo_texture = ExtResource("3_is3qh")
+metallic_specular = 0.0
+emission_enabled = true
+emission_energy_multiplier = 5.0
+emission_texture = ExtResource("3_is3qh")
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_5i6uu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.728719, -0.264066)
+shape = SubResource("BoxShape3D_v3wgt")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="shadowzombie" parent="." instance=ExtResource("2_isk4g")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="shadowzombie/Armature" index="0"]
+bones/1/position = Vector3(-1.77636e-15, 0.0279714, 0.0293967)
+bones/1/rotation = Quaternion(0.0219743, -0.706765, -0.0219743, 0.706765)
+bones/2/rotation = Quaternion(-1.91655e-07, -1.99998e-08, 0.979868, 0.199648)
+bones/3/rotation = Quaternion(1.10827e-08, 4.85616e-10, -0.148123, 0.988969)
+bones/4/rotation = Quaternion(-0.232952, -0.667633, -0.232952, 0.667633)
+bones/5/rotation = Quaternion(3.58469e-08, -2.54518e-09, -0.137937, 0.990441)
+bones/6/rotation = Quaternion(1.06158e-07, 1.21888e-07, -0.226785, 0.973945)
+bones/7/rotation = Quaternion(0.00977986, 0.0025573, 0.206939, 0.978302)
+bones/8/position = Vector3(0.0116054, 0.450456, 0.0359253)
+bones/8/rotation = Quaternion(0.810676, 0.111428, 0.0782696, 0.56944)
+bones/9/rotation = Quaternion(0.398169, 0.400649, -0.505837, 0.651974)
+bones/10/rotation = Quaternion(0.0474915, 0.00210261, -0.0712021, 0.996328)
+bones/14/position = Vector3(0.0116055, 0.450456, -0.0359253)
+bones/14/rotation = Quaternion(0.0782694, -0.56944, 0.810676, -0.111428)
+bones/15/rotation = Quaternion(0.386323, -0.392967, 0.513219, 0.65798)
+bones/16/rotation = Quaternion(0.0444677, -0.00232705, 0.07106, 0.996478)
+
+[node name="shadow" parent="shadowzombie/Armature/Skeleton3D" index="0"]
+material_override = SubResource("StandardMaterial3D_hd6b5")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.371, -0.361672)
+stream = ExtResource("4_2ou7b")
+volume_db = -10.0
+autoplay = true
+max_distance = 15.0
+
+[node name="hitsounds" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.6
+
+[editable path="shadowzombie"]

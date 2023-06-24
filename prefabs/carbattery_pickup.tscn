@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjl2q6q00557o"]
+
+[ext_resource type="Script" path="res://scripts/Pickup.gd" id="1_k7dlr"]
+[ext_resource type="PackedScene" uid="uid://bqptioay04mfc" path="res://models/carbattery.glb" id="2_g2sxf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rsppg"]
+size = Vector3(1, 0.832878, 0.304483)
+
+[node name="CarbatteryPickup" type="Area3D"]
+script = ExtResource("1_k7dlr")
+
+[node name="carbattery" parent="." instance=ExtResource("2_g2sxf")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_rsppg")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqcpp86r28040"]
+
+[ext_resource type="Script" path="res://scripts/shotgunshellspickup.gd" id="1_kdfck"]
+[ext_resource type="PackedScene" uid="uid://bmqimh6xlai6h" path="res://models/shotgunshells.glb" id="2_xbjed"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7jfdo"]
+size = Vector3(0.115938, 0.193387, 0.097863)
+
+[node name="shotgunshellspickup" type="Area3D"]
+script = ExtResource("1_kdfck")
+
+[node name="shotgunshells" parent="." instance=ExtResource("2_xbjed")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_7jfdo")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

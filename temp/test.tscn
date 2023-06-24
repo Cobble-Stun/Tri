@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxudba38wh7sb"]
+
+[ext_resource type="PackedScene" uid="uid://cefieyelc0erd" path="res://temp/test.glb" id="1_r72ov"]
+[ext_resource type="Material" uid="uid://b10h7qycbmud7" path="res://temp/grass.tres" id="2_jy3yx"]
+
+[node name="test" instance=ExtResource("1_r72ov")]
+
+[node name="test_disp_16" parent="." index="0"]
+material_override = ExtResource("2_jy3yx")

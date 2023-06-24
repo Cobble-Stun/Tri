@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8ms2u4vh7mqc"]
+
+[ext_resource type="PackedScene" uid="uid://bhacvo78l3irc" path="res://models/lighttower.glb" id="1_gtf2p"]
+[ext_resource type="Texture2D" uid="uid://cm7sxm2i1tjt5" path="res://models/lighttower_Image_0.png" id="2_asrpu"]
+[ext_resource type="Texture2D" uid="uid://c6sk0moaps223" path="res://models/lighttower_Image_1.png" id="3_ejn3y"]
+[ext_resource type="Texture2D" uid="uid://b7n1o0vskllj4" path="res://models/lighttower_Image_2.png" id="4_neb4t"]
+[ext_resource type="Texture2D" uid="uid://bnjgpap4qte0p" path="res://models/lighttower_Image_3.png" id="5_hq4wt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33bwj"]
+albedo_texture = ExtResource("2_asrpu")
+roughness_texture = ExtResource("3_ejn3y")
+emission_enabled = true
+emission_texture = ExtResource("4_neb4t")
+normal_enabled = true
+normal_texture = ExtResource("5_hq4wt")
+ao_enabled = true
+ao_texture = ExtResource("3_ejn3y")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wtamx"]
+points = PackedVector3Array(-0.216911, 1.00975, -0.350983, 0.289864, -0.194344, 0.789626, 0.0047738, -1.01845, -0.79465, -0.597227, -1.01845, -0.0341279, 0.606775, -1.01845, -0.224345, 0.194873, 0.97798, -0.414389, -0.312019, -0.194344, 0.789626, 0.0997646, -1.01845, 0.884821, -0.0268112, -0.637862, -0.889845, -0.248614, 0.97798, -0.12915, -0.597227, -0.98668, -0.224345, 0.575072, -0.542964, -0.00251186, -0.470416, -0.669627, 0.567619, 0.448261, -0.764921, 0.567619, -0.597227, -0.669627, -0.0975336, 0.131467, 1.00975, -0.509411, -0.090217, -1.01845, 0.884821, 0.0363588, -0.637862, -0.889845, -0.280316, 1.00975, -0.287577, -0.0585141, -0.0992477, 0.789626, 0.226458, 0.914649, -0.350983, -0.090217, 1.00975, -0.192555, 0.606775, -1.01845, -0.0341279, -0.280316, 1.00975, -0.224345, 0.606775, -0.669627, -0.12915, -0.090217, -1.01845, -0.79465, -0.470416, -0.764921, 0.567619, 0.16317, 1.00975, -0.350983, 0.0680617, -0.0992477, 0.789626, 0.0680617, 1.00975, -0.509411, -0.565525, -0.574729, 0.0289305, -0.470416, -0.606295, 0.536177)
+
+[node name="lighttower" type="StaticBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="lighttower" parent="." instance=ExtResource("1_gtf2p")]
+
+[node name="defaultMaterial" parent="lighttower" index="0"]
+material_override = SubResource("StandardMaterial3D_33bwj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_wtamx")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.859579, 0.0760448, -2.36982)
+
+[editable path="lighttower"]

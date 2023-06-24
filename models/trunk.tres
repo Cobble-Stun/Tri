@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://k54jqubob3bq"]
+
+[ext_resource type="Texture2D" uid="uid://xpf8rlrxxijg" path="res://models/tree_Spruce branches.png" id="1_avuji"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_avuji")
