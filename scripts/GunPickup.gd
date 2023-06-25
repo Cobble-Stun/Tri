@@ -8,3 +8,5 @@ func _on_body_entered(body):
 		body.playsinglesound(body.pickupsoundfile, body.footstepsoundorigin)
 		body.ammotext.text = str(body.ammo)
 		body.reservetext.text = str(body.reserveammo)
+		body.handsanimplayer.play("Idle")
+		body.gunanimplayer.play("Idle")

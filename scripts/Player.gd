@@ -87,8 +87,6 @@ func _ready():
 	gunsoundfiles.append(preload("res://audio/sounds/reload.wav"))
 	
 	pickupsoundfile = preload("res://audio/sounds/item pickup.wav")
-	handsanimplayer.play("Idle")
-	gunanimplayer.play("Idle")
 	
 	if SkipIntro.introplayed == false:
 		fade.visible = true
@@ -303,3 +301,7 @@ func _on_area_3d_body_entered(body):
 func _on_area_3d_body_exited(body):
 	if "Player" in body.name:
 		footstepsoundtype = 0
+
+func _on_win_trigger_body_entered(body):
+	if "Player" in body.name and parts == 3:
+		get_tree().quit()

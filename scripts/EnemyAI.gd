@@ -19,7 +19,7 @@ var state = IDLE
 @onready var attacktimer = $AttackTimer
 var material
 
-var chasestartrange = 15
+var chasestartrange = 20
 var hp = 3
 var speed
 const attack_range = 2
@@ -66,9 +66,9 @@ func _physics_process(delta):
 		PURSUING:
 			if attacking == false:
 				animplayer.play("Pursuing")
-				speed = 150
+				speed = 175
 			else:
-				speed = 125
+				speed = 150
 			velocity = (next_nav_point - global_transform.origin).normalized() * delta * speed
 			look_at(Vector3(player.global_position.x, player.global_position.y, player.global_position.z), Vector3.UP)
 			move_and_slide()
