@@ -21,7 +21,7 @@ var t_bob = 0.0
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
 @onready var startPos = camera.transform.origin
-@onready var guncamera := $Neck/Camera3D/SubViewportContainer/SubViewport/Guncam
+@onready var guncamera := $CanvasLayer/SubViewportContainer/SubViewport/Guncam
 
 #audio
 var canplayfootstepsound = true
@@ -64,8 +64,10 @@ var reserveammo = 0
 var flashlighton
 @onready var hands = $"Neck/Camera3D/Tri hands"
 var parts = 0
+var lightsoff = false
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	grasssoundfiles.append(preload("res://audio/sounds/f_grass0.wav"))
 	grasssoundfiles.append(preload("res://audio/sounds/f_grass1.wav"))
 	grasssoundfiles.append(preload("res://audio/sounds/f_grass2.wav"))
@@ -105,6 +107,7 @@ func _input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		
 func _process(_delta):
+	guncamera.global_transform = camera.global_transform
 	if hp == 2:
 		damageoverlay.visible = true
 		damageoverlay.modulate = Color(1,1,1,0.2)

@@ -30,23 +30,6 @@ spot_attenuation = 1.45
 spot_angle = 35.0
 spot_angle_attenuation = 0.999397
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Neck/Camera3D"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SubViewport" type="SubViewport" parent="Neck/Camera3D/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 4
-
-[node name="Guncam" type="Camera3D" parent="Neck/Camera3D/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.982, 0)
-cull_mask = 2
-
 [node name="Tri hands" parent="Neck/Camera3D" instance=ExtResource("2_8iyge")]
 transform = Transform3D(0.999501, 0, 0.0316026, 0, 1, 0, -0.0316026, 0, 0.999501, 0.101029, -0.00335324, -0.603773)
 visible = false
@@ -112,7 +95,7 @@ bone_name = "handik.r"
 bone_idx = 1
 
 [node name="Tri shotgun" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D" instance=ExtResource("3_yjksm")]
-transform = Transform3D(0.0988604, -0.170933, 0.980311, 0.487504, 0.867138, 0.102037, -0.867506, 0.467818, 0.169056, -0.435818, 0.00797844, -1.99527e-05)
+transform = Transform3D(0.0988604, -0.170933, 0.980311, 0.487504, 0.867138, 0.102037, -0.867506, 0.467818, 0.169056, -0.435818, 0.00797844, -1.99974e-05)
 
 [node name="shell top_2" parent="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D" index="0"]
 transform = Transform3D(0.999999, 0.000470792, 0.00116101, -0.000530059, 0.998668, 0.0515882, -0.00113517, -0.0515888, 0.998668, 0.0153948, -0.0283452, -0.00263718)
@@ -216,13 +199,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.00481, 0)
 process_callback = 0
 one_shot = true
 
+[node name="CanvasLayer" parent="." instance=ExtResource("6_j2rmm")]
+follow_viewport_enabled = false
+
 [node name="Ambience" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.960129, 0)
 stream = ExtResource("5_4ors5")
 autoplay = true
 panning_strength = 0.0
-
-[node name="CanvasLayer" parent="." instance=ExtResource("6_j2rmm")]
 
 [node name="TextTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -232,3 +216,4 @@ wait_time = 2.0
 [editable path="Neck/Camera3D/Tri hands"]
 [editable path="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun"]
 [editable path="Neck/Camera3D/Tri hands/hands armature/Skeleton3D/BoneAttachment3D/Tri shotgun/Armature/Skeleton3D/BoneAttachment3D/shell left"]
+[editable path="CanvasLayer"]

@@ -17,6 +17,7 @@ var state = IDLE
 @onready var collider = $CollisionShape3D
 @onready var timer = $Timer
 @onready var attacktimer = $AttackTimer
+var material
 
 var chasestartrange = 15
 var hp = 3
@@ -31,6 +32,7 @@ func _ready():
 	animplayer.play("Idle")
 	deathsound = preload("res://audio/sounds/enemydeathsound.wav")	
 	hitsound = preload("res://audio/sounds/hitsound.wav")
+	material = preload("res://lighttowerlightoff.tres")
 	
 func _physics_process(delta):
 	velocity = Vector3.ZERO
@@ -51,6 +53,11 @@ func _physics_process(delta):
 			animplayer.play("Target")
 			await animplayer.animation_finished
 			state = PURSUING
+			if player.lightsoff == false:
+				player.lightsoff = true
+				var lighttower = get_parent().get_node("NavigationRegion3D/lighttower")
+				lighttower.get_node("OmniLight3D").visible = false
+				lighttower.get_node("lighttower/defaultMaterial").set_material_override(material)
 			
 		TARGETLOST:
 			animplayer.play_backwards("Target")
