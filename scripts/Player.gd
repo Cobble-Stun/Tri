@@ -48,7 +48,6 @@ var concretesoundfiles = []
 @onready var damageoverlay = $CanvasLayer/DamageOverlay
 @onready var fade = $CanvasLayer/Black
 @onready var message = $CanvasLayer/Message
-@onready var healthtext = $CanvasLayer/Health
 @onready var ammotext = $CanvasLayer/Ammo
 @onready var reservetext = $CanvasLayer/Reserve
 @onready var texttimer = $TextTimer
@@ -90,7 +89,6 @@ func _ready():
 	gunanimplayer.play("Idle")
 	
 	if SkipIntro.introplayed == false:
-		healthtext.visible = false
 		fade.visible = true
 		message.text = "[center]My car needs 3 parts.[/center]"
 		texttimer.start()
@@ -99,30 +97,24 @@ func _ready():
 		message.modulate = Color(1,1,1,0)
 		SkipIntro.introplayed = true
 		fade.visible = false
-		healthtext.visible = true
 	
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseMotion:
 		neck.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		
 func _process(_delta):
-	guncamera.global_transform = camera.global_transform
-	
 	if hp == 2:
 		damageoverlay.visible = true
 		damageoverlay.modulate = Color(1,1,1,0.2)
-		healthtext.text = "Vitality: //"
 	elif hp == 1:
 		damageoverlay.modulate = Color(1,1,1,0.5)
-		healthtext.text = "Vitality: /"
 	elif hp == 0 and dead == false:
 		dead = true
 		message.modulate = Color(1,1,1,1)
 		damageoverlay.visible = false
 		fade.visible = true
-		healthtext.visible = false
 		ammotext.visible = false
 		reservetext.visible = false
 		message.text = "[center]Letum.[/center]"
@@ -206,6 +198,8 @@ func _physics_process(delta):
 				playrandfootsteps(grasssoundfiles)
 			elif(footstepsoundtype == 1):
 				playrandfootsteps(concretesoundfiles)
+			else: 
+				playrandfootsteps(grasssoundfiles)
 	elif is_on_floor() and direction == Vector3.ZERO:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
@@ -299,3 +293,10 @@ func partscheck():
 func _on_timer_timeout():
 	canplayfootstepsound = true
 
+func _on_area_3d_body_entered(body):
+	if "Player" in body.name:
+		footstepsoundtype = 1
+
+func _on_area_3d_body_exited(body):
+	if "Player" in body.name:
+		footstepsoundtype = 0

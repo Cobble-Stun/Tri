@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bqptioay04mfc" path="res://models/carbattery.glb" id="2_g2sxf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rsppg"]
-size = Vector3(1, 0.832878, 0.304483)
+size = Vector3(0.512793, 0.355486, 0.338234)
 
 [node name="CarbatteryPickup" type="Area3D"]
 script = ExtResource("1_k7dlr")
@@ -14,3 +14,5 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_rsppg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -8,6 +8,7 @@
 size = Vector3(0.287585, 0.47458, 0.684383)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_61pdm"]
+size = Vector3(13.2922, 3.21735, 1.57967)
 
 [node name="Radio" type="StaticBody3D"]
 script = ExtResource("1_8sbn3")
