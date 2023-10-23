@@ -16,7 +16,7 @@ emission_enabled = true
 emission_energy_multiplier = 5.0
 emission_texture = ExtResource("3_is3qh")
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_5i6uu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -24,6 +24,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.728719, -0.264066)
 shape = SubResource("BoxShape3D_v3wgt")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+radius = 0.2
 
 [node name="shadowzombie" parent="." instance=ExtResource("2_isk4g")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -56,8 +57,9 @@ volume_db = -10.0
 autoplay = true
 max_distance = 15.0
 
-[node name="hitsounds" type="AudioStreamPlayer" parent="."]
-bus = &"sfx"
+[node name="hitsoundplayer" type="AudioStreamPlayer3D" parent="."]
+
+[node name="hitsoundplayer2" type="AudioStreamPlayer3D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5

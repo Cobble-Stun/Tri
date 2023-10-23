@@ -12,11 +12,12 @@ var state = IDLE
 @onready var player = get_parent().get_node("Player")
 @onready var nav_agent = $NavigationAgent3D
 @onready var animplayer = $shadowzombie/AnimationPlayer
+@onready var hitsoundplayer = $hitsoundplayer
 @onready var audioplayer = $AudioStreamPlayer3D
-@onready var hitsoundplayer = $hitsounds
 @onready var collider = $CollisionShape3D
 @onready var timer = $Timer
 @onready var attacktimer = $AttackTimer
+@onready var next_nav_point
 var material
 
 var chasestartrange = 20
@@ -26,18 +27,20 @@ const attack_range = 2
 var dead = false
 var attacking = false
 var deathsound
-var hitsound
+var hitsounds = []
 
 func _ready():
 	animplayer.play("Idle")
 	deathsound = preload("res://audio/sounds/enemydeathsound.wav")	
-	hitsound = preload("res://audio/sounds/hitsound.wav")
+	hitsounds.append(preload("res://audio/sounds/hitsound.wav"))
+	hitsounds.append(preload("res://audio/sounds/gunshotwound.wav"))
 	material = preload("res://lighttowerlightoff.tres")
 	
-func _physics_process(delta):
+func _process(delta):
 	velocity = Vector3.ZERO
 	nav_agent.set_target_position(player.global_transform.origin)
-	var next_nav_point = nav_agent.get_next_path_position()
+	await get_tree().process_frame
+	next_nav_point = nav_agent.get_next_path_position()
 	if hp == 0:
 		state = DEAD
 	
@@ -99,13 +102,16 @@ func _physics_process(delta):
 			
 func enemy_damage_dealt():
 	hp = hp - 1
+	hitsoundplayer.stream = hitsounds[1]
+	hitsoundplayer.play()
+	await hitsoundplayer.finished
 
 func do_damage_to_target():
 	attacktimer.start()
 	await attacktimer.timeout
 	if global_position.distance_to(player.global_position) < attack_range:
 		player.hp -= 1
-		hitsoundplayer.stream = hitsound
+		hitsoundplayer.stream = hitsounds[0]
 		hitsoundplayer.play()
 		attacktimer.stop()
 		return

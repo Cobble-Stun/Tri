@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://vu2fsfvxowks"]
+[gd_scene load_steps=9 format=3 uid="uid://vu2fsfvxowks"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_6qiht"]
 [ext_resource type="PackedScene" uid="uid://ctvwayhcmdak3" path="res://models/Tri hands.glb" id="2_8iyge"]
 [ext_resource type="PackedScene" uid="uid://cjfg4xudrm1v2" path="res://models/Tri shotgun.glb" id="3_yjksm"]
 [ext_resource type="PackedScene" uid="uid://c3l0l8kbil80k" path="res://models/shell left.glb" id="4_2v8fw"]
 [ext_resource type="AudioStream" uid="uid://c2atcfphjhpuq" path="res://audio/sounds/crickets.wav" id="5_4ors5"]
+[ext_resource type="Texture2D" uid="uid://b888jar0ke8xv" path="res://Crosshair-PNG-Picture.png" id="6_ikfpp"]
 [ext_resource type="PackedScene" uid="uid://33c656d1myy0" path="res://Canvas.tscn" id="6_j2rmm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x2iv1"]
@@ -17,6 +18,7 @@ script = ExtResource("1_6qiht")
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.981509, 0)
 cull_mask = 1048573
+far = 55.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Neck/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0699296, 0.0110605)
@@ -25,13 +27,14 @@ light_indirect_energy = 16.0
 
 [node name="FlashLight" type="SpotLight3D" parent="Neck/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.358491, -0.374954)
+layers = 3
 spot_range = 8.0
 spot_attenuation = 1.45
 spot_angle = 35.0
 spot_angle_attenuation = 0.999397
 
 [node name="Tri hands" parent="Neck/Camera3D" instance=ExtResource("2_8iyge")]
-transform = Transform3D(0.999501, 0, 0.0316026, 0, 1, 0, -0.0316026, 0, 0.999501, 0.101029, -0.00335324, -0.603773)
+transform = Transform3D(0.999501, 0, 0.0316026, 0, 1, 0, -0.0316026, 0, 0.999501, 0.096, -0.073, -0.604)
 visible = false
 
 [node name="Skeleton3D" parent="Neck/Camera3D/Tri hands/hands armature" index="0"]
@@ -201,6 +204,21 @@ one_shot = true
 
 [node name="CanvasLayer" parent="." instance=ExtResource("6_j2rmm")]
 follow_viewport_enabled = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SubViewportContainer/SubViewport" index="1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_ikfpp")
 
 [node name="Ambience" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.960129, 0)

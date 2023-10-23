@@ -13,6 +13,7 @@ const SENSITIVITY = 0.01
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #bob variables
+var pos = Vector3.ZERO
 const BOB_FREQUENCY = 2.0
 const BOB_AMP = 0.12
 var toggleSpeed = 2.0
@@ -85,6 +86,7 @@ func _ready():
 	
 	gunsoundfiles.append(preload("res://audio/sounds/gunshot.wav"))
 	gunsoundfiles.append(preload("res://audio/sounds/reload.wav"))
+	gunsoundfiles.append(preload("res://audio/sounds/Gun Dryfire.wav"))
 	
 	pickupsoundfile = preload("res://audio/sounds/item pickup.wav")
 	
@@ -135,7 +137,7 @@ func _process(_delta):
 		flashlighton = true
 		playsinglesound(flashlightsoundfiles[1], flashlightsoundorigin)
 		
-	if hands.visible == true:
+	if hands.visible == true and not dead:
 		if Input.is_action_just_pressed("shoot") and !handsanimplayer.current_animation == "Reload" and ammo > 0:
 			handsanimplayer.stop(true)
 			gunanimplayer.stop(true)
@@ -144,13 +146,15 @@ func _process(_delta):
 			handsanimplayer.play("Shoot")
 			gunanimplayer.play("Shoot")
 			playsinglesound(gunsoundfiles[0], gunsoundorigin)
+			if raycast.is_colliding():
+				var target = raycast.get_collider()
+				if target.is_in_group("Enemy"):
+					target.enemy_damage_dealt()
 			await handsanimplayer.animation_finished
 			handsanimplayer.play("Idle")
 			gunanimplayer.play("Idle")
-			if raycast.is_colliding():
-				var target = raycast.get_collider()
-				if "Enemy" in target.name:
-					target.enemy_damage_dealt()
+		elif Input.is_action_just_pressed("shoot") and !handsanimplayer.current_animation == "Reload" and ammo == 0:
+			playsinglesound(gunsoundfiles[2], gunsoundorigin)
 		elif Input.is_action_just_pressed("reload") and ammo < 3 and !handsanimplayer.current_animation == "Reload" and reserveammo >= 3:
 			reserveammo -= 3
 			reservetext.text = str(reserveammo)
@@ -210,28 +214,22 @@ func _physics_process(delta):
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
 
 	t_bob += delta * velocity.length() * float(is_on_floor())
-	headbobtoggle(t_bob)
-	restartpos(delta)
+	toggleHeadBob(t_bob)
+	resetHeadBob(delta)
 	move_and_slide()
 	
-func headbobtoggle(time):
+func toggleHeadBob(time):
 	if(velocity.length() < toggleSpeed or !is_on_floor()):
 		return
-	playmotion(headbob(time))
-	
-func headbob(time) -> Vector3:
-	var pos = Vector3.ZERO
-	pos.y = sin(time * BOB_FREQUENCY) * BOB_AMP + 1.0
+	pos.y = sin(time * BOB_FREQUENCY) * BOB_AMP + 0.6
 	pos.x = cos(time * BOB_FREQUENCY/2.0) * BOB_AMP * 2.0
-	return pos
+	camera.transform.origin = pos
 	
-func restartpos(time):
+func resetHeadBob(delta):
 	if(camera.transform.origin == startPos):
 		return
-	camera.transform.origin = camera.transform.origin.lerp(startPos, 1 * time)
-	
-func playmotion(motion):
-	camera.transform.origin = motion
+	camera.transform.origin = camera.transform.origin.lerp(startPos, 2 * delta)
+	pos = camera.transform.origin
 	
 func playrandfootsteps(array):
 	if speed == WALKSPEED:
