@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dp7nukwgjx2cn"
+path.s3tc="res://.godot/imported/mainlevel_wood_NRM.jpg-786fa23114eef99c063d5dbaa8e31117.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "82a04744434515bb88b763f0855cc79e"
+}
+
+[deps]
+
+source_file="res://mainlevel_wood_NRM.jpg"
+dest_files=["res://.godot/imported/mainlevel_wood_NRM.jpg-786fa23114eef99c063d5dbaa8e31117.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://mainlevel_wood_NRM.jpg"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

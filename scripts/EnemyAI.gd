@@ -69,7 +69,7 @@ func _process(delta):
 		PURSUING:
 			if attacking == false:
 				animplayer.play("Pursuing")
-				speed = 175
+				speed = 250
 			else:
 				speed = 150
 			velocity = (next_nav_point - global_transform.origin).normalized() * delta * speed

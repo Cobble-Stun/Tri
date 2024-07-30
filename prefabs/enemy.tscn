@@ -32,12 +32,12 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 [node name="Skeleton3D" parent="shadowzombie/Armature" index="0"]
 bones/1/position = Vector3(-1.77636e-15, 0.0279714, 0.0293967)
 bones/1/rotation = Quaternion(0.0219743, -0.706765, -0.0219743, 0.706765)
-bones/2/rotation = Quaternion(-1.91655e-07, -1.99998e-08, 0.979868, 0.199648)
+bones/2/rotation = Quaternion(-1.91655e-07, -1.99999e-08, 0.979868, 0.199648)
 bones/3/rotation = Quaternion(1.10827e-08, 4.85616e-10, -0.148123, 0.988969)
 bones/4/rotation = Quaternion(-0.232952, -0.667633, -0.232952, 0.667633)
 bones/5/rotation = Quaternion(3.58469e-08, -2.54518e-09, -0.137937, 0.990441)
 bones/6/rotation = Quaternion(1.06158e-07, 1.21888e-07, -0.226785, 0.973945)
-bones/7/rotation = Quaternion(0.00977986, 0.0025573, 0.206939, 0.978302)
+bones/7/rotation = Quaternion(0.00977985, 0.0025573, 0.206939, 0.978302)
 bones/8/position = Vector3(0.0116054, 0.450456, 0.0359253)
 bones/8/rotation = Quaternion(0.810676, 0.111428, 0.0782696, 0.56944)
 bones/9/rotation = Quaternion(0.398169, 0.400649, -0.505837, 0.651974)
@@ -56,10 +56,13 @@ stream = ExtResource("4_2ou7b")
 volume_db = -10.0
 autoplay = true
 max_distance = 15.0
+panning_strength = 0.0
 
 [node name="hitsoundplayer" type="AudioStreamPlayer3D" parent="."]
+panning_strength = 0.1
 
 [node name="hitsoundplayer2" type="AudioStreamPlayer3D" parent="."]
+panning_strength = 0.1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5

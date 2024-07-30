@@ -257,6 +257,7 @@ func playsinglesound(sound, origin):
 	var splayer = AudioStreamPlayer3D.new()
 	origin.add_child(splayer)
 	splayer.bus = "sfx"
+	splayer.panning_strength = 0
 	
 	splayer.stream = sound
 	splayer.play()

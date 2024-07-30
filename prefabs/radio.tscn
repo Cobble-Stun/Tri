@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bi7hl34t8ljdo"]
+[gd_scene load_steps=7 format=3 uid="uid://bi7hl34t8ljdo"]
 
 [ext_resource type="Script" path="res://scripts/radio.gd" id="1_8sbn3"]
 [ext_resource type="PackedScene" uid="uid://nn7pay8b1oep" path="res://models/radio.glb" id="1_rio6d"]
 [ext_resource type="AudioStream" uid="uid://b33xhwbrvbnie" path="res://audio/sounds/radiorecording.wav" id="3_883ol"]
+[ext_resource type="Material" uid="uid://cg34q4sf8ku83" path="res://models/radio.tres" id="3_hsmum"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8n0gg"]
 size = Vector3(0.287585, 0.47458, 0.684383)
@@ -15,6 +16,9 @@ script = ExtResource("1_8sbn3")
 
 [node name="radio" parent="." instance=ExtResource("1_rio6d")]
 transform = Transform3D(0.440884, 0, 0, 0, 0.440884, 0, 0, 0, 0.440884, 0, 0, 0)
+
+[node name="lp_base" parent="radio" index="0"]
+material_override = ExtResource("3_hsmum")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.223406, 0)
@@ -35,3 +39,5 @@ bus = &"sfx"
 emission_angle_enabled = true
 
 [connection signal="body_entered" from="CheckForPlayer" to="." method="_on_check_for_player_body_entered"]
+
+[editable path="radio"]

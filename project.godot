@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Tri"
+config/tags=PackedStringArray("finished")
 run/main_scene="res://Main Scene.tscn"
-config/features=PackedStringArray("4.1", "GL Compatibility")
+config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/show_image=false
 config/icon="res://icon.png"
 
@@ -82,5 +83,6 @@ crouching={
 
 [rendering]
 
-renderer/rendering_method.mobile="gl_compatibility"
+occlusion_culling/bvh_build_quality=1
 environment/defaults/default_clear_color=Color(0.00784314, 0.00784314, 0.0588235, 1)
+occlusion_culling/use_occlusion_culling=true
